@@ -1,0 +1,3548 @@
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20121004072615)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20121004072615"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOrders (20121004072706)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "orders" ("token" varchar(255), "transaction_id" varchar(255), "address_one" varchar(255), "address_two" varchar(255), "city" varchar(255), "state" varchar(255), "zip" varchar(255), "country" varchar(255), "status" varchar(255), "number" varchar(255), "uuid" varchar(255), "user_id" varchar(255), "price" decimal, "shipping" decimal, "tracking_number" varchar(255), "phone" varchar(255), "name" varchar(255), "expiration" date, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20121004072706"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePaymentOptions (20130106183354)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "payment_options" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "amount" decimal, "amount_display" varchar(255), "description" text, "shipping_desc" varchar(255), "delivery_desc" varchar(255), "limit" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20130106183354"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddPaymentOptionIdToOrders (20130107010733)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.3ms)[0m  [1mALTER TABLE "orders" ADD "payment_option_id" integer[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20130107010733"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (4.9ms)[0m  [1mINSERT INTO "payment_options" ("amount", "amount_display", "created_at", "delivery_desc", "description", "limit", "shipping_desc", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount", #<BigDecimal:7fa9a4db10a0,'0.1E2',9(45)>], ["amount_display", "$10"], ["created_at", Sat, 21 Dec 2013 12:14:50 PST -08:00], ["delivery_desc", ""], ["description", "<strong>Basic level: </strong>You receive a great big thankyou from us!  You Rock"], ["limit", -1], ["shipping_desc", ""], ["updated_at", Sat, 21 Dec 2013 12:14:50 PST -08:00]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "payment_options" ("amount", "amount_display", "created_at", "delivery_desc", "description", "limit", "shipping_desc", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount", #<BigDecimal:7fa9a22376b8,'0.1E3',9(45)>], ["amount_display", "$100"], ["created_at", Sat, 21 Dec 2013 12:14:50 PST -08:00], ["delivery_desc", "Estimated delivery: Oct 2013"], ["description", "<strong>Package 1: </strong>You receive our print edition"], ["limit", 250], ["shipping_desc", "add $3 to ship outside the US"], ["updated_at", Sat, 21 Dec 2013 12:14:50 PST -08:00]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "payment_options" ("amount", "amount_display", "created_at", "delivery_desc", "description", "limit", "shipping_desc", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount", #<BigDecimal:7fa9a2244c50,'0.125E3',9(45)>], ["amount_display", "$125"], ["created_at", Sat, 21 Dec 2013 12:14:50 PST -08:00], ["delivery_desc", "Estimated delivery: Oct 2013"], ["description", "<strong>Package 2: </strong>You will receive both our print and digital edition"], ["limit", -1], ["shipping_desc", "add $3 to ship outside the US"], ["updated_at", Sat, 21 Dec 2013 12:14:50 PST -08:00]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "payment_options" ("amount", "amount_display", "created_at", "delivery_desc", "description", "limit", "shipping_desc", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount", #<BigDecimal:7fa9a225fb90,'0.2E3',9(45)>], ["amount_display", "$200"], ["created_at", Sat, 21 Dec 2013 12:14:50 PST -08:00], ["delivery_desc", "Estimated delivery: Oct 2013"], ["description", "<strong>Package 3: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."], ["limit", -1], ["shipping_desc", "add $3 to ship outside the US"], ["updated_at", Sat, 21 Dec 2013 12:14:50 PST -08:00]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "payment_options" ("amount", "amount_display", "created_at", "delivery_desc", "description", "limit", "shipping_desc", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount", #<BigDecimal:7fa9a226eb68,'0.25E3',9(45)>], ["amount_display", "$250"], ["created_at", Sat, 21 Dec 2013 12:14:50 PST -08:00], ["delivery_desc", "Estimated delivery: Oct 2013"], ["description", "<strong>Package 4: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."], ["limit", -1], ["shipping_desc", "add $3 to ship outside the US"], ["updated_at", Sat, 21 Dec 2013 12:14:50 PST -08:00]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "payment_options" ("amount", "amount_display", "created_at", "delivery_desc", "description", "limit", "shipping_desc", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount", #<BigDecimal:7fa9a227daf0,'0.3E3',9(45)>], ["amount_display", "$300"], ["created_at", Sat, 21 Dec 2013 12:14:50 PST -08:00], ["delivery_desc", "Estimated delivery: Oct 2013"], ["description", "<strong>Package 5: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."], ["limit", -1], ["shipping_desc", "add $3 to ship outside the US"], ["updated_at", Sat, 21 Dec 2013 12:14:50 PST -08:00]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "payment_options" ("amount", "amount_display", "created_at", "delivery_desc", "description", "limit", "shipping_desc", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount", #<BigDecimal:7fa9a228cb68,'0.5E3',9(45)>], ["amount_display", "$500"], ["created_at", Sat, 21 Dec 2013 12:14:50 PST -08:00], ["delivery_desc", "Estimated delivery: Oct 2013"], ["description", "<strong>Package 6: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."], ["limit", -1], ["shipping_desc", "add $3 to ship outside the US"], ["updated_at", Sat, 21 Dec 2013 12:14:50 PST -08:00]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "payment_options" ("amount", "amount_display", "created_at", "delivery_desc", "description", "limit", "shipping_desc", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount", #<BigDecimal:7fa9a22a7ee0,'0.1E4',9(45)>], ["amount_display", "$1000"], ["created_at", Sat, 21 Dec 2013 12:14:50 PST -08:00], ["delivery_desc", "Estimated delivery: Oct 2013"], ["description", "<strong>Package 7: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."], ["limit", -1], ["shipping_desc", "add $3 to ship outside the US"], ["updated_at", Sat, 21 Dec 2013 12:14:50 PST -08:00]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+DEPRECATION WARNING: You didn't set config.secret_key_base. Read the upgrade documentation to learn more about this new config option. (called from service at /Users/neilharan/.rvm/rubies/ruby-2.0.0-p353/lib/ruby/2.0.0/webrick/httpserver.rb:138)
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:15:10 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.6ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.2ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (24.7ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (29.1ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.7ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.7ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.7ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.7ms)
+  Rendered preorder/homepage/_press.html.erb (0.5ms)
+  Rendered preorder/index.html.erb within layouts/application (47.8ms)
+DEPRECATION WARNING: asset_path with two arguments is deprecated. Use asset_path("") instead. (called from _app_views_layouts_application_html_erb__290538443755385893_70299516944200 at /Developer/rawstart/app/views/layouts/application.html.erb:6)
+DEPRECATION WARNING: asset_path with two arguments is deprecated. Use asset_path("") instead. (called from _app_views_layouts_application_html_erb__290538443755385893_70299516944200 at /Developer/rawstart/app/views/layouts/application.html.erb:6)
+DEPRECATION WARNING: asset_path with two arguments is deprecated. Use asset_path("") instead. (called from _app_views_layouts_application_html_erb__290538443755385893_70299516944200 at /Developer/rawstart/app/views/layouts/application.html.erb:6)
+DEPRECATION WARNING: asset_path with two arguments is deprecated. Use asset_path("") instead. (called from _app_views_layouts_application_html_erb__290538443755385893_70299516944200 at /Developer/rawstart/app/views/layouts/application.html.erb:6)
+  Rendered preorder/_header.html.erb (1.2ms)
+  Rendered preorder/_copyright.html.erb (0.5ms)
+  Rendered preorder/_google_analytics.html.erb (0.6ms)
+  Rendered preorder/_footer.html.erb (5.3ms)
+Completed 200 OK in 2531ms (Views: 2525.2ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:13 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:13 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:13 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:13 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:13 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:13 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:13 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:14 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/image1.jpg" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/assets/image1.jpg" for 127.0.0.1 at 2013-12-21 17:15:15 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.2ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (6.6ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (8.7ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.1ms)
+  Rendered preorder/homepage/_press.html.erb (0.1ms)
+  Rendered preorder/index.html.erb within layouts/application (13.5ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.1ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (1.8ms)
+Completed 200 OK in 48ms (Views: 43.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:18:06 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/image1.jpg" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/assets/image1.jpg" for 127.0.0.1 at 2013-12-21 17:18:07 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.1ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (3.7ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (5.5ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.6ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.1ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (55.5ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (1.2ms)
+Completed 200 OK in 80ms (Views: 76.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/image1.jpg" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/image1.jpg" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:24:11 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.1ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (3.4ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (5.0ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.4ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.0ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (9.7ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.0ms)
+  Rendered preorder/_footer.html.erb (1.1ms)
+Completed 200 OK in 33ms (Views: 30.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:50 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/image1.jpg" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/image1.jpg" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:24:51 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.2ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (4.4ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (5.9ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.4ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.0ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (10.0ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.0ms)
+  Rendered preorder/_footer.html.erb (1.1ms)
+Completed 200 OK in 35ms (Views: 32.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:29 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:25:30 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.1ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (3.7ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (5.2ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.4ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.1ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (10.0ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (1.3ms)
+Completed 200 OK in 36ms (Views: 32.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:27 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:31:28 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.1ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (4.0ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (6.1ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.4ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.1ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (13.2ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.1ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (2.2ms)
+Completed 200 OK in 90ms (Views: 37.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:47 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 17:35:48 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:44:51 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.1ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (3.5ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (4.9ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.0ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (9.1ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (1.2ms)
+Completed 200 OK in 34ms (Views: 30.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 17:44:52 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.1ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (3.6ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (5.0ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.2ms)
+  Rendered preorder/homepage/_faqs.html.erb (45.3ms)
+  Rendered preorder/homepage/_press.html.erb (0.1ms)
+  Rendered preorder/index.html.erb within layouts/application (56.5ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.1ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (1.6ms)
+Completed 200 OK in 81ms (Views: 78.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:18 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 17:47:19 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.2ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (4.2ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (5.5ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.4ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.0ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (10.2ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (1.2ms)
+Completed 200 OK in 36ms (Views: 32.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:55:05 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 17:55:06 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 18:02:25 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.2ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (4.4ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (6.7ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.5ms)
+  Rendered preorder/homepage/_press.html.erb (0.1ms)
+  Rendered preorder/index.html.erb within layouts/application (14.0ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.1ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (2.4ms)
+Completed 200 OK in 47ms (Views: 42.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:25 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:25 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:25 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:25 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 18:02:26 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.2ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (4.2ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (6.1ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.5ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (10.8ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.1ms)
+  Rendered preorder/_footer.html.erb (1.2ms)
+Completed 200 OK in 38ms (Views: 34.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 18:02:54 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 18:02:55 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 18:02:55 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 18:02:55 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 18:02:55 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 18:02:55 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 18:02:55 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 18:02:55 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 18:05:35 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.2ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (4.4ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (6.0ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.5ms)
+  Rendered preorder/homepage/_press.html.erb (0.1ms)
+  Rendered preorder/index.html.erb within layouts/application (10.9ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.0ms)
+  Rendered preorder/_footer.html.erb (1.1ms)
+Completed 200 OK in 34ms (Views: 31.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 18:05:36 -0300
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-21 18:06:22 -0300
+Processing by PreorderController#index as HTML
+  Rendered preorder/homepage/_value_proposition.html.erb (0.1ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35m (0.1ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("orders"."price") AS sum_id FROM "orders" WHERE (token != '' OR token != NULL)
+  Rendered preorder/homepage/_stats.html.erb (3.8ms)
+  Rendered preorder/homepage/_show_dont_tell.html.erb (5.2ms)
+  Rendered preorder/homepage/_key_points.html.erb (0.1ms)
+  Rendered preorder/homepage/_other_points.html.erb (0.0ms)
+  Rendered preorder/homepage/_middle_reserve.html.erb (0.1ms)
+  Rendered preorder/homepage/_faqs.html.erb (0.0ms)
+  Rendered preorder/homepage/_press.html.erb (0.0ms)
+  Rendered preorder/index.html.erb within layouts/application (9.2ms)
+  Rendered preorder/_header.html.erb (0.1ms)
+  Rendered preorder/_copyright.html.erb (0.0ms)
+  Rendered preorder/_google_analytics.html.erb (0.0ms)
+  Rendered preorder/_footer.html.erb (1.1ms)
+Completed 200 OK in 82ms (Views: 79.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.core.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.theme.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.menu.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.button.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.slider.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.all.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.base.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/html5shiv-printshiv.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.accordion.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.droppable.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-drop.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-blind.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-bounce.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-clip.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-explode.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fade.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-fold.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-highlight.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-pulsate.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-scale.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-shake.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-slide.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.effect-transfer.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.progressbar.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.selectable.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.slider.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.tabs.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.spinner.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.tooltip.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.details.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.ui.all.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/jquery.textchange.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/preorder.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/3-background.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/4-background.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/1-background.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/2-background.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/bullet.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/visualprogramming.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/video_placeholder.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/sandbox.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/whatisrawbots.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
+
+
+Started GET "/assets/robotcrafting.png" for 127.0.0.1 at 2013-12-21 18:06:23 -0300
